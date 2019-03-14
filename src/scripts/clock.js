@@ -1,4 +1,4 @@
-class Clock {
+export default class Clock {
   constructor(target, timeNow, seconds, hour, mins) {
     this.target = document.querySelector(`${target}`)
     this.timeNow = timeNow
@@ -60,11 +60,4 @@ class Clock {
       // Update every second.
     }, 1000)
   }
-}
-
-// instantiate the clock and intilize it.
-// const clock = new Clock('.target').intilize()
-
-for (let i = 0; i < 6; i++) {
-  new Clock('.target').intilize()
 }
