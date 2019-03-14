@@ -10,15 +10,14 @@ export default class Clock {
   createClock() {
     // Create a blank div element
     const div = document.createElement('div')
+    div.className = 'clock'
 
     // Create the clock html structure
     div.innerHTML = `
-    <div class="clock">
-      <div class="clock-face">
-        <div class="hand hour-hand"></div>
-        <div class="hand min-hand"></div>
-        <div class="hand second-hand"></div>
-      </div>
+    <div class="clock-face">
+      <div class="hand hour-hand"></div>
+      <div class="hand min-hand"></div>
+      <div class="hand second-hand"></div>
     </div>
     `
 
