@@ -1,4 +1,8 @@
-.clock-target {
+$clock_size: 450px;
+$digits_color: red;
+$sec_hand_color: red;
+
+.clocks-container {
   width: 100%;
   display: flex;
   justify-content: space-around;
@@ -6,34 +10,98 @@
 }
 
 .clock {
-  width: 30rem;
-  height: 30rem;
-  border: 20px solid white;
+  width: $clock_size;
+  height: $clock_size;
+  border: 20px solid #c0c0c0;
   border-radius: 50%;
   margin: 50px auto;
   position: relative;
   padding: 2rem;
   box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1), inset 0 0 0 3px #efefef,
     inset 0 0 10px black, 0 0 10px rgba(0, 0, 0, 0.2);
+  background-image: url("/src/assets/clockface.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  &__face {
+    width: 100%;
+    height: 100%;
+  }
+
+  &__center-buble {
+    height: 17px;
+    width: 17px;
+    background-color: $sec_hand_color;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 2;
+  }
 }
 
-.clock-face {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transform: translateY(-3px);
-  /* account for the height of the clock hands */
+.clock {
+  &__hands {
+    position: relative;
+    z-index: 1;
+    transform: rotate(90deg);
+    width: 100%;
+    height: 100%;
+  }
+
+  &__hand {
+    width: 50%;
+    background: black;
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+
+    position: absolute;
+    transform-origin: 100%;
+    transition: all 0.5;
+    transition-timing-function: 
+    cubic-bezier(0.1, 2.7, 0.58, 1);
+  }
+
+  &__hand-hours {
+    top: calc(50% - 5px);
+    height: 10px;
+  }
+
+  &__hand-mins {
+    width: 50%;
+    top: calc(50% - 3px);
+    height: 6px;
+  }
+
+  &__hand-secs {
+    background-color: $sec_hand_color;
+    top: calc(50% - 2px);
+    height: 4px;
+  }
 }
 
-.hand {
-  width: 50%;
-  height: 6px;
-  background: black;
-  position: absolute;
-  top: 50%;
-  transform-origin: 100%;
-  transform: rotate(90deg);
-  transition: all 0.5;
-  transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
-}
+.clock {
+  &__digi {
+    transform: translate(-50%, -50%);
+    display: inline-block;
 
+    padding: 2px 0 1px;
+    position: absolute;
+    width: 150px;
+    top: 62%;
+    left: 50%;
+
+    font-family: Courier;
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    color: $digits_color;
+
+    // Styles
+    border-radius: 5px;
+    text-shadow: 1px 1px #797979;
+    background-color: rgba(190, 190, 190, 0.7);
+    border: 2px solid #666565;
+  }
+}
