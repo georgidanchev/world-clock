@@ -11,7 +11,7 @@ export default class Clock {
     this.sec = _sec
     this.curDegrees = _curDegrees
     this.digiClock = _digiClock
-    this.timeZoon = 'Europe/London'
+    this.timeZone = 'Europe/London'
   }
 
   createClock() {
@@ -23,7 +23,7 @@ export default class Clock {
 
     // Create the clock html structure.
     div.innerHTML = `
-    <h2 class="clock-title">LONDON - GMT</h2>
+    <h2 class="clock-title">${this.timeZone.split('/')[1]}</h2>
     <div class="clock">
       <div class="clock__face">
         <div class="clock__hands clock__hands--start">
@@ -82,17 +82,13 @@ export default class Clock {
     this.setTime()
   }
 
-  intilize(timeZone) {
+  intilize(_timeZone) {
+    this.timeZone = _timeZone
     this.createClock()
-    this.timeZoon = timeZone
     this.updateTime()
 
-    const time2 = DateTime.local()
-    const time2adjusted = time2.setZone('Europe/Sofia')
-    console.log(time2adjusted.c)
-
     setInterval(() => {
-      this.updateTime(timeZone)
+      this.updateTime()
     }, 1000)
   }
 }
