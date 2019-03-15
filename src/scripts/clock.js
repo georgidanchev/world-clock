@@ -11,6 +11,7 @@ export default class Clock {
     this.sec = _sec
     this.curDegrees = _curDegrees
     this.digiClock = _digiClock
+    this.timeZoon = 'Europe/London'
   }
 
   createClock() {
@@ -67,11 +68,11 @@ export default class Clock {
     this.digiClock.innerText = `${this.digiTime}`
   }
 
-  updateTime(timeZone = 'Europe/London') {
+  updateTime() {
     function zerofiy(num) {
       return (num < 10 ? '0' : '') + num
     }
-    this.dateTime = DateTime.local().setZone(timeZone)
+    this.dateTime = DateTime.local().setZone(this.timeZone)
     this.hour = this.dateTime.c.hour % 12
     this.min = this.dateTime.c.minute
     this.sec = this.dateTime.c.second
@@ -83,7 +84,8 @@ export default class Clock {
 
   intilize(timeZone) {
     this.createClock()
-    this.updateTime(timeZone)
+    this.timeZoon = timeZone
+    this.updateTime()
 
     const time2 = DateTime.local()
     const time2adjusted = time2.setZone('Europe/Sofia')
