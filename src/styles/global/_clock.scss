@@ -1,13 +1,27 @@
-$clock_size: 450px;
+$clock_size: 250px;
+
 $digits_color: red;
 $sec_hand_color: red;
-$clock_nipple_size: 17px;
+$clock_buble_size: 15px;
+
+$hrs_hand_width: 8px;
+$mins_hand_width: 6px;
+$secs_hand_width: 4px;
 
 .clocks-container {
-  width: 100%;
   display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.clock-container {
+  margin: 10px 20px;
+}
+
+.clock-title {
+  text-transform: uppercase;
+  text-align: center;
+  margin-top: -95px;
 }
 
 .clock {
@@ -15,7 +29,7 @@ $clock_nipple_size: 17px;
   height: $clock_size;
   border: 20px solid #c0c0c0;
   border-radius: 50%;
-  margin: 50px auto;
+  margin: 30px auto;
   position: relative;
   padding: 2rem;
   box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1), inset 0 0 0 3px #efefef,
@@ -30,8 +44,8 @@ $clock_nipple_size: 17px;
   }
 
   &__center-buble {
-    height: $clock_nipple_size;
-    width: $clock_nipple_size;
+    height: $clock_buble_size;
+    width: $clock_buble_size;
     background-color: $sec_hand_color;
     transform: translate(-50%, -50%);
     border-radius: 50%;
@@ -51,35 +65,50 @@ $clock_nipple_size: 17px;
     height: 100%;
   }
 
-  &__hand {
-    background: black;
-    border-radius: 5px;
-    border: 1px solid rgba(255, 255, 255, 0.8);
-    
-    // width: 50%;
-    // position: absolute;
-    // transform-origin: 100%;
-    // transition: all 0.5;
-    // transition-timing-function: 
-    // cubic-bezier(0.1, 2.7, 0.58, 1);
+  &__hands--start {
+    &__hand {
+      transition: transform .5s ease;
+    }
   }
 
-  // &__hand-hours {
-  //   top: calc(50% - 5px);
-  //   height: 10px;
-  // }
+  &__hand {
+    // To rotate like a clock we need to
+    // transform the hands 50% across and
+    // 100% down for the bottom of the hand.
+    transform-origin: 50% 100%;
+    position: absolute;
+    top: 0%;
 
-  // &__hand-mins {
-  //   width: 50%;
-  //   top: calc(50% - 3px);
-  //   height: 6px;
-  // }
+    border-radius: 5px;
+    background: black;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+  }
 
-  // &__hand-secs {
-  //   background-color: $sec_hand_color;
-  //   top: calc(50% - 2px);
-  //   height: 4px;
-  // }
+  &__hand--inited {
+    transition: none;
+  }
+
+  &__hand-hours {
+    left: calc(50% - #{$hrs_hand_width / 2});
+    width: $hrs_hand_width;
+    height: 30%;
+    top: 20%;
+  }
+
+  &__hand-mins {
+    left: calc(50% - #{$mins_hand_width / 2});
+    width: $mins_hand_width;
+    height: 40%;
+    top: 10%;
+  }
+
+  &__hand-secs {
+    background-color: $sec_hand_color;
+    left: calc(50% - #{$secs_hand_width / 2});
+    width: $secs_hand_width;
+    height: 50%;
+    top: 0;
+  }
 }
 
 .clock {

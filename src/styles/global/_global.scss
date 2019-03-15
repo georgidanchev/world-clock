@@ -2,12 +2,15 @@ html {
   font-family: "helvetica neue";
 }
 
-.index-body { 
-  min-height: 100vh;
+main {
   display: flex;
-  align-items: center;
+  justify-content: center;
+  height: 100vh;
 }
 
+.index-body { 
+  min-height: 100vh;
+}
 
 .main-bg {
   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#7abcff+0,60abf8+44,4096ee+100;Blue+3D+%2314 */
