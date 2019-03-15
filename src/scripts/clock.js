@@ -4,7 +4,7 @@ import { DateTime } from 'luxon'
 export default class Clock {
   constructor(_target, _dateTime, _digiTime, _hour, _min, _sec, _curDegrees, _digiClock) {
     this.target = document.querySelector(_target)
-    this.dateTime = _dateTime
+    this.dateTime = DateTime.local()
     this.digiTime = _digiTime
     this.hour = _hour
     this.min = _min
@@ -20,7 +20,7 @@ export default class Clock {
     // Add class to it.
     div.className = 'clock-container'
 
-    // Create the clock html structure
+    // Create the clock html structure.
     div.innerHTML = `
     <h2 class="clock-title">LONDON - GMT</h2>
     <div class="clock">
@@ -67,11 +67,11 @@ export default class Clock {
     this.digiClock.innerText = `${this.digiTime}`
   }
 
-  updateTime() {
+  updateTime(timeZone = 'Europe/London') {
     function zerofiy(num) {
       return (num < 10 ? '0' : '') + num
     }
-    this.dateTime = DateTime.local()
+    this.dateTime = DateTime.local().setZone(timeZone)
     this.hour = this.dateTime.c.hour % 12
     this.min = this.dateTime.c.minute
     this.sec = this.dateTime.c.second
@@ -81,12 +81,16 @@ export default class Clock {
     this.setTime()
   }
 
-  intilize() {
+  intilize(timeZone) {
     this.createClock()
-    this.updateTime()
-    //
+    this.updateTime(timeZone)
+
+    const time2 = DateTime.local()
+    const time2adjusted = time2.setZone('Europe/Sofia')
+    console.log(time2adjusted.c)
+
     setInterval(() => {
-      this.updateTime()
+      this.updateTime(timeZone)
     }, 1000)
   }
 }
