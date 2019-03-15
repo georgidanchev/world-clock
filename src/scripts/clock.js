@@ -1,38 +1,16 @@
 import { DateTime } from 'luxon'
 
-class Clock {
-  constructor(target, dateTime, digiTime, hour, min, sec) {
-    this.target = document.querySelector(target)
-    this.dateTime = dateTime
-    this.digiTime = digiTime
-    this.hour = hour
-    this.min = min
-    this.sec = sec
-  }
 
-  digiTime() {
-    function zerofiy(num) {
-      return (num < 10 ? '0' : '') + num
-    }
-    this.digiTime = `${zerofiy(this.hour)}:${zerofiy(this.min)}:${zerofiy(this.sec)}`
-  }
-
-  updateTime() {
-    setInterval(() => {
-      this.dateTime = DateTime.local()
-      this.hour = this.dateTime.c.hour % 12
-      this.min = this.dateTime.c.minute
-      this.sec = this.dateTime.c.second
-      this.digiTime()
-    }, 1000)
-  }
-}
-
-export default class Analogue extends Clock {
-  constructor(target, digiTime, hour, min, sec, digiClock, curDegrees) {
-    super(target, digiTime, hour, min, sec)
-    this.curDegrees = curDegrees
-    this.digiClock = digiClock
+export default class Clock {
+  constructor(_target, _dateTime, _digiTime, _hour, _min, _sec, _curDegrees, _digiClock) {
+    this.target = document.querySelector(_target)
+    this.dateTime = _dateTime
+    this.digiTime = _digiTime
+    this.hour = _hour
+    this.min = _min
+    this.sec = _sec
+    this.curDegrees = _curDegrees
+    this.digiClock = _digiClock
   }
 
   createClock() {
@@ -89,10 +67,26 @@ export default class Analogue extends Clock {
     this.digiClock.innerText = `${this.digiTime}`
   }
 
+  updateTime() {
+    function zerofiy(num) {
+      return (num < 10 ? '0' : '') + num
+    }
+    this.dateTime = DateTime.local()
+    this.hour = this.dateTime.c.hour % 12
+    this.min = this.dateTime.c.minute
+    this.sec = this.dateTime.c.second
+
+    this.digiTime = `${zerofiy(this.hour)}:${zerofiy(this.min)}:${zerofiy(this.sec)}`
+
+    this.setTime()
+  }
+
   intilize() {
     this.createClock()
-    this.setTime()
+    this.updateTime()
     //
-    setInterval(() => {}, 1000)
+    setInterval(() => {
+      this.updateTime()
+    }, 1000)
   }
 }
