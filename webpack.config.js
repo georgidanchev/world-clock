@@ -6,7 +6,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.html/,
+        test: /\.html$/,
         use: ['html-loader'],
       },
       {
@@ -15,7 +15,7 @@ module.exports = {
           loader: 'file-loader',
           options: {
             name: '[name].[hash].[ext]',
-            outputPath: 'imgs',
+            outputPath: 'assets',
           },
         },
       },

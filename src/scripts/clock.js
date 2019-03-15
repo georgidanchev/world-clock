@@ -1,16 +1,18 @@
 export default class Clock {
-  constructor(target, timeNow, digTime, seconds, hour, mins) {
-    this.target = document.querySelector(`${target}`)
+  constructor(target, timeNow, digiTime, handHrs, handMin, handSec) {
+    this.target = document.querySelector(target)
     this.timeNow = timeNow
-    this.digiTime = digTime
-    this.hour = hour
-    this.mins = mins
-    this.seconds = seconds
+    this.digiTime = digiTime
+    this.handHrs = handHrs
+    this.handMin = handMin
+    this.handSec = handSec
   }
 
   createClock() {
     // Create a blank div element
     const div = document.createElement('div')
+
+    // Add class to it.
     div.className = 'clock'
 
     // Create the clock html structure
@@ -26,44 +28,62 @@ export default class Clock {
     </div>`
 
     // Get references for the clock hands
-    this.hour = div.querySelector('[data-hrs-hand]')
-    this.mins = div.querySelector('[data-mins-hand]')
-    this.seconds = div.querySelector('[data-secs-hand]')
+    this.handHrs = div.querySelector('[data-hrs-hand]')
+    this.handMins = div.querySelector('[data-mins-hand]')
+    this.handSecs = div.querySelector('[data-secs-hand]')
     this.digiTime = div.querySelector('[data-clock-digi]')
     this.digiTime.innerText = '00:00:00'
+
     // Append the clock
     this.target.appendChild(div)
   }
 
+  // playSound() {
+  //   const tickAudioArray = ['./src/assets/tick_1.mp3', './src/assets/tick_2.mp3', './src/assets/tick_3.mp3', './src/assets/tick_4.mp3']
+    
+  //   const audio = new Audio()
+
+  //   audio.currentTime = 0;
+
+  //   const max = tickAudioArray.length
+  //   const random = Math.floor(Math.random() * (+max - +0))
+
+  //   // const audio = new Audio()
+  //   // audio.src = tickAudioArray[0]
+  //   // audio.play()
+  // }
+
   setTime() {
+    // Store time variables in object.
     const curTime = {
       hrs: this.timeNow.getHours(),
       mins: this.timeNow.getMinutes(),
       secs: this.timeNow.getSeconds(),
     }
 
+    // Conver time to degrees.
     const curDegrees = {
-      hrs: ((curTime.hrs / 12) * 360),
-      mins: ((curTime.mins / 60) * 360),
-      secs: ((curTime.secs / 60) * 360),
+      // There are 30 degrees in each hour, also
+      // 6 degree for each minute and second.
+      // Modulo gives us the reminder of 12,
+      // as the hour we get is 24 hour fromat.
+      hrs: 30 * (curTime.hrs % 12),
+      mins: 6 * curTime.mins,
+      secs: 6 * curTime.secs,
     }
 
-    function format12(hour) {
-      return hour > 12 ? hour - 12 : hour
-    }
-
+    // If number is less the 10, add zero in front.
     function zerofiy(num) {
       return (num < 10 ? '0' : '') + num
     }
 
-     console.info(`${format12(curTime.hrs)}:${zerofiy(curTime.mins)}:${zerofiy(curTime.secs)}`)
+    // Set analogue clock hands.
+    this.handHrs.style.transform = `rotate(${curDegrees.hrs}deg)`
+    this.handMins.style.transform = `rotate(${curDegrees.mins}deg)`
+    this.handSecs.style.transform = `rotate(${curDegrees.secs}deg)`
 
-
-    // // Set the degree to the clock hand.
-    this.hour.style.transform = `rotate(${curDegrees.hrs}deg)`
-    this.mins.style.transform = `rotate(${curDegrees.mins}deg)`
-    this.seconds.style.transform = `rotate(${curDegrees.secs}deg)`
-    this.digiTime.innerText = `${zerofiy(format12(curTime.hrs))}:${zerofiy(curTime.mins)}:${zerofiy(curTime.secs)}`
+    // Set the digital clock.
+    this.digiTime.innerText = `${zerofiy(curTime.hrs)}:${zerofiy(curTime.mins)}:${zerofiy(curTime.secs)}`
   }
 
   intilize() {
