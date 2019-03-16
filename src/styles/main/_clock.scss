@@ -8,35 +8,30 @@ $hrs_hand_width: 8px;
 $mins_hand_width: 6px;
 $secs_hand_width: 4px;
 
-.clocks-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.clock-container {
-  margin: 10px 20px;
-}
-
-.clock-title {
-  text-transform: uppercase;
-  text-align: center;
-  margin-top: -95px;
-}
-
 .clock {
-  width: $clock_size;
-  height: $clock_size;
-  border: 20px solid #c0c0c0;
-  border-radius: 50%;
-  margin: 30px auto;
-  position: relative;
-  padding: 2rem;
-  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1), inset 0 0 0 3px #efefef,
-    inset 0 0 10px black, 0 0 10px rgba(0, 0, 0, 0.2);
-  background-image: url("/src/assets/clockface.png");
-  background-size: cover;
-  background-repeat: no-repeat;
+  // margin: 10px 20px;
+
+  &__title {
+    text-transform: uppercase;
+    text-align: center;
+    margin-top: -95px;
+  }
+
+  &__wrap {
+    width: $clock_size;
+    height: $clock_size;
+    border: 20px solid #c0c0c0;
+    border-radius: 50%;
+    margin: 30px auto;
+    position: relative;
+    padding: 2rem;
+    box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1), inset 0 0 0 3px #efefef,
+      inset 0 0 10px black, 0 0 10px rgba(0, 0, 0, 0.2);
+    background-image: url("/src/assets/clockface.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+  
+  }
 
   &__face {
     width: 100%;
@@ -63,12 +58,6 @@ $secs_hand_width: 4px;
     // transform: rotate(90deg);
     width: 100%;
     height: 100%;
-  }
-
-  &__hands--start {
-    &__hand {
-      transition: transform .5s ease;
-    }
   }
 
   &__hand {

@@ -1,3 +1,5 @@
 @import "~normalize-scss/sass/normalize/import-now";
-@import "global/global";
-@import "global/clock";
+@import "mixins/responsive";
+@import "global/mobMenu";
+@import "global/general";
+@import "main/clock";

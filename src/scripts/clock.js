@@ -19,14 +19,14 @@ export default class Clock {
     const div = document.createElement('div')
 
     // Add class to it.
-    div.className = 'clock-container'
+    div.className = 'clock'
 
     // Create the clock html structure.
     div.innerHTML = `
-    <h2 class="clock-title">${this.timeZone.split('/')[1]}</h2>
-    <div class="clock">
+    <h2 class="clock__title">${this.timeZone.split('/')[1]}</h2>
+    <div class="clock__wrap">
       <div class="clock__face">
-        <div class="clock__hands clock__hands--start">
+        <div class="clock__hands">
           <div class="clock__hand clock__hand-hours" data-hrs-hand></div>
           <div class="clock__hand clock__hand-mins" data-mins-hand></div>
           <div class="clock__hand clock__hand-secs" data-secs-hand></div>
@@ -82,7 +82,7 @@ export default class Clock {
     this.setTime()
   }
 
-  intilize(_timeZone) {
+  onLoad(_timeZone) {
     this.timeZone = _timeZone
     this.createClock()
     this.updateTime()
