@@ -6,33 +6,34 @@ export default class MobMenuBtn {
   onLoad() {
     // This target ref gets lost
     // in named functions.
-    const mobMenu = this.target
-    
+    const mobMenuBtn = this.target
+
     // Set button state to open.
-    function menuOpen() {
-      mobMenu.classList.add('active')
-      mobMenu.dataset.active = 'true'
+    function menuBtnOpen() {
+      mobMenuBtn.classList.add('active')
+      mobMenuBtn.dataset.active = 'true'
+      document.body.dispatchEvent(new CustomEvent('mobMenuOpen', {}))
     }
 
     // Set button state to closed.
-    function menuClose() {
-      if (mobMenu.dataset.active === 'true') {
-        mobMenu.classList.remove('active')
-        mobMenu.dataset.active = 'false'
+    function menuBtnClose() {
+      if (mobMenuBtn.dataset.active === 'true') {
+        mobMenuBtn.classList.remove('active')
+        mobMenuBtn.dataset.active = 'false'
+        document.body.dispatchEvent(new CustomEvent('mobMenuClose', {}))
       }
     }
 
     // When you click menu button.
-    mobMenu.addEventListener('click', () => {
-      if (mobMenu.dataset.active === 'true') {
-        menuClose()
+    mobMenuBtn.addEventListener('click', () => {
+      if (mobMenuBtn.dataset.active === 'true') {
+        menuBtnClose()
       } else {
-        menuOpen()
+        menuBtnOpen()
       }
     })
 
     // Custom Events for global event handling.
-    mobMenu.addEventListener('mobMenuOpen', menuOpen())
-    mobMenu.addEventListener('mobMenuClose', menuClose())
+    document.body.addEventListener('mobBtnClose', menuBtnClose())
   }
 }

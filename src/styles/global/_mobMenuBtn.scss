@@ -1,0 +1,72 @@
+.menu-btn {
+  display: inline-block;
+  position: fixed;
+  z-index: 10;
+
+  // @include above-mobile {
+  //   //display: none !important;
+  // }
+
+  &__wrap {
+    width: 45px;
+    height: 35px;
+    padding: 5px 0;
+    margin: 10px;
+    margin-left: 15px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+  
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  
+    position: relative;
+  }
+
+  &__line {
+    height: 5px;
+    width: 30px;
+    left: 18%;
+
+    position: absolute;
+    background-color: black;
+    border-radius: 10px;
+
+    transition: opacity 50ms,
+      top 200ms ease,
+      transform 200ms ease;
+  }
+
+  &__line-1 {
+    top: 10px;
+  }
+
+  &__line-2 {
+    top: 20px;
+  }
+
+  &__line-3 {
+    top: 30px;
+  }
+}
+
+.menu-btn.active {
+  .menu-btn__wrap {
+    background-color: orange;
+  }
+
+  .menu-btn__line-1 {
+    transform: rotate(45deg);
+    top: 20px;
+  }
+
+  .menu-btn__line-2 {
+    opacity: 0;
+  }
+
+  .menu-btn__line-3 {
+    transform: rotate(-45deg);
+    top: 20px;
+  }
+}
