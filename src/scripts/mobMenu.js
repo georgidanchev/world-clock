@@ -7,11 +7,11 @@ export default class MobMenu {
     const menuBtn = this.target
 
     document.body.addEventListener('mobMenuOpen', () => {
-      menuBtn.style.backgroundColor = 'red'
+      menuBtn.classList.add('active')
     })
 
     document.body.addEventListener('mobMenuClose', () => {
-      menuBtn.style.backgroundColor = 'blue'
+      menuBtn.classList.remove('active')
     })
   }
 }

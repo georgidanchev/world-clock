@@ -3,10 +3,6 @@
   position: fixed;
   z-index: 10;
 
-  // @include above-mobile {
-  //   //display: none !important;
-  // }
-
   &__wrap {
     width: 45px;
     height: 35px;
@@ -17,11 +13,10 @@
     border-radius: 5px;
   
     display: flex;
+    position: relative;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-  
-    position: relative;
   }
 
   &__line {
@@ -52,10 +47,6 @@
 }
 
 .menu-btn.active {
-  .menu-btn__wrap {
-    background-color: orange;
-  }
-
   .menu-btn__line-1 {
     transform: rotate(45deg);
     top: 20px;

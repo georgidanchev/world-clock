@@ -4,8 +4,7 @@ export default class MobMenuBtn {
   }
 
   onLoad() {
-    // This target ref gets lost
-    // in named functions.
+    // 'this.target' ref gets lost.
     const mobMenuBtn = this.target
 
     // Set button state to open.
