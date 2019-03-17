@@ -2,16 +2,16 @@ import { DateTime } from 'luxon'
 import Flags from './flags'
 
 export default class Clock {
-  constructor(_target, _dateTime, _digiTime, _hour, _min, _sec, _curDegrees, _digiClock) {
+  constructor(_target) {
     this.target = document.querySelector(_target)
     this.dateTime = DateTime.local()
-    this.digiTime = _digiTime
-    this.hour = _hour
-    this.min = _min
-    this.sec = _sec
-    this.curDegrees = _curDegrees
-    this.digiClock = _digiClock
     this.timeZone = 'Europe/London'
+    this.curDegrees = 0
+    this.digiClock = 0
+    this.digiTime = 0
+    this.hour = 0
+    this.min = 0
+    this.sec = 0
   }
 
   createClock() {
@@ -21,7 +21,7 @@ export default class Clock {
     // Add class to it.
     div.className = 'clock'
 
-    const cityName = this.timeZone.split('/')[1]
+    const cityName = this.timeZone.split('/')[1].replace('_', ' ').replace('_', ' ')
 
     // Create the clock html structure.
     div.innerHTML = `

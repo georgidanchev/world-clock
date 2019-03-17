@@ -1,17 +1,18 @@
 export default class MobMenuBtn {
   constructor(_target) {
+    this.body = document.body
     this.target = document.querySelector(_target)
   }
 
   onLoad() {
     // 'this.target' ref gets lost.
-    const mobMenuBtn = this.target
+    const [mobMenuBtn, body] = [this.target, this.body]
 
     // Set button state to open.
     function menuBtnOpen() {
       mobMenuBtn.classList.add('active')
       mobMenuBtn.dataset.active = 'true'
-      document.body.dispatchEvent(new CustomEvent('mobMenuOpen', {}))
+      body.dispatchEvent(new CustomEvent('mobMenuOpen', {}))
     }
 
     // Set button state to closed.
@@ -19,7 +20,7 @@ export default class MobMenuBtn {
       if (mobMenuBtn.dataset.active === 'true') {
         mobMenuBtn.classList.remove('active')
         mobMenuBtn.dataset.active = 'false'
-        document.body.dispatchEvent(new CustomEvent('mobMenuClose', {}))
+        body.dispatchEvent(new CustomEvent('mobMenuClose', {}))
       }
     }
 
@@ -33,6 +34,6 @@ export default class MobMenuBtn {
     })
 
     // Custom Events for global event handling.
-    document.body.addEventListener('mobBtnClose', menuBtnClose())
+    body.addEventListener('mobBtnClose', menuBtnClose())
   }
 }

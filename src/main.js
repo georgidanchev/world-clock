@@ -6,7 +6,8 @@ import Search from './scripts/search'
 
 new Clock('[data-clock]').onLoad('Europe/London')
 new Clock('[data-clock]').onLoad('Europe/Madrid')
-new Clock('[data-clock]').onLoad('Europe/Sofia')
+new Clock('[data-clock]').onLoad('Asia/Hong_Kong')
+
 
 new MobMenu('[data-mob-menu]').onLoad()
 new MobMenuBtn('[data-mob-btn]').onLoad()

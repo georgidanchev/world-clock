@@ -1,16 +1,17 @@
 export default class MobMenu {
   constructor(_taget) {
+    this.body = document.body
     this.target = document.querySelector(_taget)
   }
 
   onLoad() {
-    const menuBtn = this.target
+    const [body, menuBtn] = [document.body, this.target]
 
-    document.body.addEventListener('mobMenuOpen', () => {
+    body.addEventListener('mobMenuOpen', () => {
       menuBtn.classList.add('active')
     })
 
-    document.body.addEventListener('mobMenuClose', () => {
+    body.addEventListener('mobMenuClose', () => {
       menuBtn.classList.remove('active')
     })
   }
