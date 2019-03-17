@@ -4,14 +4,15 @@ export default function nameRes(target) {
   const currentValues = json
   let targetCode
 
-  console.log(target)
   Object.keys(currentValues).forEach((key) => {
     if (currentValues[key] === target) {
-      // console.log(`MATCH!!! ${key}`)
+      // We got a match, reference the code.
       targetCode = key
       return true
     }
     return false
   })
+
+  // Pass the code.
   return targetCode
 }

@@ -41,7 +41,6 @@
   "dependencies": {
     "@babel/polyfill": "^7.2.5",
     "luxon": "^1.11.4",
-    "moment-timezone": "^0.5.23",
     "normalize-scss": "^7.0.1",
     "svg-country-flags": "^1.2.6"
   }
