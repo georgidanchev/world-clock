@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon'
-
+import Flags from './flags'
 
 export default class Clock {
   constructor(_target, _dateTime, _digiTime, _hour, _min, _sec, _curDegrees, _digiClock) {
@@ -21,9 +21,13 @@ export default class Clock {
     // Add class to it.
     div.className = 'clock'
 
+    const cityName = this.timeZone.split('/')[1]
+
+    // Flags(cityName)
+
     // Create the clock html structure.
     div.innerHTML = `
-    <h2 class="clock__title">${this.timeZone.split('/')[1]}</h2>
+    <h2 class="clock__title"><img class="clock__title-img" src="/src/assets/flags/.png" alt=""> ${cityName}</h2>
     <div class="clock__wrap">
       <div class="clock__face">
         <div class="clock__hands">
@@ -72,12 +76,13 @@ export default class Clock {
     function zerofiy(num) {
       return (num < 10 ? '0' : '') + num
     }
-    this.dateTime = DateTime.local().setZone(this.timeZone)
-    this.hour = this.dateTime.c.hour % 12
-    this.min = this.dateTime.c.minute
-    this.sec = this.dateTime.c.second
 
-    this.digiTime = `${zerofiy(this.hour)}:${zerofiy(this.min)}:${zerofiy(this.sec)}`
+    this.dateTime = DateTime.local().setZone(this.timeZone)
+    this.hour = this.dateTime.hour
+    this.min = this.dateTime.minute
+    this.sec = this.dateTime.second
+
+    this.digiTime = `${this.dateTime.weekdayShort.toUpperCase()} ${zerofiy(this.hour)}:${zerofiy(this.min)}`
 
     this.setTime()
   }
@@ -86,6 +91,8 @@ export default class Clock {
     this.timeZone = _timeZone
     this.createClock()
     this.updateTime()
+
+    Flags('asdasd')
 
     setInterval(() => {
       this.updateTime()

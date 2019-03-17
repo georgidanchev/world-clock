@@ -17,6 +17,11 @@ $secs_hand_width: 4px;
     margin-top: -95px;
   }
 
+  &__title-img {
+    height: 20px;
+    width: auto;
+  }
+
   &__wrap {
     width: $clock_size;
     height: $clock_size;
