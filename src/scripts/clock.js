@@ -23,11 +23,9 @@ export default class Clock {
 
     const cityName = this.timeZone.split('/')[1]
 
-    // Flags(cityName)
-
     // Create the clock html structure.
     div.innerHTML = `
-    <h2 class="clock__title"><img class="clock__title-img" src="/src/assets/flags/.png" alt=""> ${cityName}</h2>
+    <h2 class="clock__title"><img class="clock__title-img" src="/src/assets/flags/${Flags(cityName)}.png" alt=""> ${cityName}</h2>
     <div class="clock__wrap">
       <div class="clock__face">
         <div class="clock__hands">
@@ -91,8 +89,6 @@ export default class Clock {
     this.timeZone = _timeZone
     this.createClock()
     this.updateTime()
-
-    Flags('asdasd')
 
     setInterval(() => {
       this.updateTime()
