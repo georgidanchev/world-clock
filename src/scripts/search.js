@@ -5,6 +5,7 @@ export default class Search {
     this.target = document.querySelector(_target)
     this.input = this.target.querySelector('[data-input]')
     this.output = this.target.querySelector('[data-output]')
+    this.serchBg = this.target.querySelector('[data-serchBg]')
     this.cities = []
   }
 
@@ -28,7 +29,7 @@ export default class Search {
       // then replace up to two underscores.
       const newString = String(place.split('/')[1]).replace('_', ' ').replace('_', ' ')
       // build html with template litreal.
-      return `<li data-timezone="${place}">${newString}</li>`
+      return `<li class="search-cities__results" data-timezone="${place}">${newString}</li>`
       // replace ',' with '' (nothing).
     }).join('')
 
@@ -38,19 +39,53 @@ export default class Search {
 
 
   onLoad() {
+    const [input, output, serchBg] = [this.input, this.output, this.serchBg]
+
     // On load push json file into array.
     this.cities.push(...json)
     // On keyup pass value to match func.
-    this.input.addEventListener('keyup', () => {
+    input.addEventListener('keyup', (e) => {
       // Replace spaces with underscore as
       // the json file needs that to work.
-      this.showMatches(String(this.input.value).replace(' ', '_').replace(' ', '_'))
+      this.showMatches(String(input.value).replace(' ', '_').replace(' ', '_'))
+      e.target.classList.add('active')
     })
 
-    this.output.addEventListener('click', (e) => {
-     if (e.target.dataset.timezone) {
-       console.log(e.target.dataset.timezone)
-     }
+    input.onkeypress = (e) => {
+      // If we press enter in the input field
+        const key = e.charCode || e.keyCode || 0
+        if (key === 13) {
+        e.preventDefault()
+      }
+    }
+
+    input.addEventListener('click', () => {
+      // input clicked
+      serchBg.classList.add('active')
+    })
+
+    function resetInput(time) {
+      setTimeout(() => {
+        input.classList.remove('active')
+        output.classList.remove('active')
+        serchBg.classList.remove('active')
+        output.innerHTML = ''
+        input.value = ''
+      }, time)
+    }
+    
+    output.addEventListener('click', (e) => {
+      if (e.target.dataset.timezone) {
+        addNewClock(e.target.dataset.timezone)
+        e.target.classList.add('active')
+        resetInput(500)
+      }
+    })
+
+    serchBg.addEventListener('click', (e) => {
+      if (e.target === serchBg) {
+        resetInput()
+      }
     })
   }
  }

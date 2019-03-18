@@ -1,0 +1,84 @@
+$search-wdith: 300px;
+
+$search-input-bg: whitesmoke;
+$search-wrap-bg: blue;
+
+.search-cities {
+  &__wrap {
+    @include flex-xy-center;
+    background-color: $search-wrap-bg;
+    position: relative;
+    height: 50px;
+    z-index: 5;
+  }
+
+  &__input, &__suggestions {
+    background-color: $search-input-bg
+  }
+
+  &__input {
+    text-align: center;
+    border-radius: 5px;
+    position: relative;
+
+    width: $search-wdith;
+    height: 25px;
+    z-index: 5;
+    border: 0;
+ 
+    &:focus {
+      outline-color: black;
+      outline: none;
+    }
+
+    &.active {
+      border-radius: 5px 5px 0 0;
+      &__input:focus {
+        outline: none;
+      }
+    }
+  }
+
+  &__suggestions {
+    width: $search-wdith;
+    position: absolute;
+    z-index: 5;
+
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    top: 39px;
+
+    border-radius: 0 0 5px 5px;
+    max-height: 300px;
+    overflow: hidden;
+  }
+
+  &__results {
+    text-align: center;
+    padding: 5px;
+
+    &.active {
+      background-color: greenyellow;
+    }
+  }
+}
+
+.search-background {
+  background-color: rgba(255, 255, 255, .5);
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  z-index: 4; 
+  left: 0;
+  top: 0;
+ 
+  transition: opacity 500ms;
+  pointer-events: none;
+  opacity: 0;
+
+  &.active {
+    pointer-events: auto;
+    opacity: 1;
+  }
+}

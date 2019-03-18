@@ -7,24 +7,31 @@
     <title>World Clock & Timer</title>
   </head>
   <body class="index-body main-bg">
-    <header>
+    <header class="header">
+      <div class="header__wrap">
+        <form class="search-cities" data-search >
+          <div class="search-cities__wrap">
+            <input type="text" class="search-cities__input" data-input placeholder="Search for a city...">
+            <ul class="search-cities__suggestions" data-output>
+            </ul>
+          </div>
 
-      <form class="search-cities" data-search>
-        <input type="text" class="search" data-input placeholder="Search for a city...">
-        <ul class="suggestions" data-output>
-        </ul>
-      </form>
+          <div class="search-background" data-serchBg></div>
+        </form>
+      </div>
+      
+    
 
 
-      <div class="menu-btn" data-mob-btn>
+      <!-- <div class="menu-btn" data-mob-btn>
         <div class="menu-btn__wrap">
           <div class="menu-btn__line menu-btn__line-1"></div>
           <div class="menu-btn__line menu-btn__line-2"></div>
           <div class="menu-btn__line menu-btn__line-3"></div>
         </div>
-      </div>
+      </div> -->
 
-      <div class="mob-menu" data-mob-menu>
+      <!-- <div class="mob-menu" data-mob-menu>
         <div class="mob-menu__wrap">
 
           <div class="menu__list">
@@ -58,7 +65,7 @@
               <li class="menu__item"><input type="checkbox" id="london" name="scales">
                 White</li>
             </ul>
-          </div>
+          </div> -->
 
         </div>
       </div>
