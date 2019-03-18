@@ -25,7 +25,6 @@ export default class Clock {
 
     // Create the clock html structure.
     div.innerHTML = `
-    <h2 class="clock__title"><img class="clock__title-img" src="/src/assets/flags/${Flags(cityName)}.png" alt=""> ${cityName}</h2>
     <div class="clock__wrap">
       <div class="clock__face">
         <div class="clock__hands">
@@ -37,6 +36,7 @@ export default class Clock {
         <span class="clock__digi" data-clock-digi>00:00:00</span>
       </div>
     </div>
+    <h2 class="clock__title"><img class="clock__title-img" src="/src/assets/flags/${Flags(cityName)}.png" alt=""> ${cityName}</h2>
     `
 
     // Get references for the clock hands
@@ -79,9 +79,7 @@ export default class Clock {
     this.hour = this.dateTime.hour
     this.min = this.dateTime.minute
     this.sec = this.dateTime.second
-
     this.digiTime = `${this.dateTime.weekdayShort.toUpperCase()} ${zerofiy(this.hour)}:${zerofiy(this.min)}`
-
     this.setTime()
   }
 

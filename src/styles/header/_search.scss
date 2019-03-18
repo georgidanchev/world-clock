@@ -1,3 +1,5 @@
+$search-input-height: 30px;
+$search-wrap-height: 60px;
 $search-wdith: 300px;
 
 $search-input-bg: whitesmoke;
@@ -7,8 +9,8 @@ $search-wrap-bg: blue;
   &__wrap {
     @include flex-xy-center;
     background-color: $search-wrap-bg;
+    height: $search-wrap-height;
     position: relative;
-    height: 50px;
     z-index: 5;
   }
 
@@ -22,7 +24,7 @@ $search-wrap-bg: blue;
     position: relative;
 
     width: $search-wdith;
-    height: 25px;
+    height: $search-input-height;
     z-index: 5;
     border: 0;
  

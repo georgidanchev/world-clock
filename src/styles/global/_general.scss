@@ -2,22 +2,19 @@ html {
   font-family: "helvetica neue";
 }
 
-.index-body { 
-  min-height: 100vh;
+body {
+  height: 100vh;
 }
 
-.index-main {
-  min-height: 100vh;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  flex-wrap: wrap;
+main {
+  height: 100%;
 }
 
 h1, h2, h3, h4, h5, h6, p, span {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 
 .main-bg {
   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#7abcff+0,60abf8+44,4096ee+100;Blue+3D+%2314 */
