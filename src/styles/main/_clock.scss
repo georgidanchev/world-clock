@@ -23,6 +23,7 @@ $secs_hand_width: 4px;
 
   &__icon {
     height: $clock_icon_size;
+    cursor: pointer;
 
     .primary {
       fill: $ui-secondary-color;

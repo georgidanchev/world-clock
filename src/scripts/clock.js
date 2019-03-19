@@ -94,11 +94,8 @@ export default class Clock {
   }
 
   onLoad(_timeZone) {
-    if (_timeZone === 'start') {
-      this.timeZone = this.dateTime.zoneName
-    } else {
-      this.timeZone = _timeZone
-    }
+    this.timeZone = _timeZone
+    
 
     this.createClock()
     this.updateTime()

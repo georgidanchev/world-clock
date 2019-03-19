@@ -1,15 +1,22 @@
+import { DateTime } from 'luxon'
 import Clock from './clock'
 
 export default class Manager {
-  constructor() {
+  constructor(_target) {
     this.body = document.body
     this.timezones = []
+    this.clockTraget = _target
   }
 
-  saveData(data) {
-    this.timezones.push(data)
-    localStorage.setItem('timezones',
-    JSON.stringify(this.timezones))
+  saveData(allData, data) {
+    if (allData === true) {
+      localStorage.setItem('timezones',
+      JSON.stringify(this.timezones))
+    } else {
+      this.timezones.push(data)
+      localStorage.setItem('timezones',
+      JSON.stringify(this.timezones))
+    }
   }
 
   loadData() {
@@ -17,7 +24,7 @@ export default class Manager {
       const getLocalData = JSON.parse(localStorage.getItem('timezones'))
       this.timezones = [...getLocalData]
     } else {
-      this.saveData('start')
+      this.saveData(false, DateTime.local().zoneName)
     }
   }
 
@@ -28,22 +35,60 @@ export default class Manager {
     console.log(this.timezones)
   }
 
-
-  onLoad() {
-    this.loadData()
-
-    function addClock(data) {
-      new Clock('[data-clock]').onLoad(data)
-    }
+  initAllClocks() {
+    document.querySelector(this.clockTraget).innerHTML = ''
 
     if (this.timezones.length > 0) {
       this.timezones.forEach((e) => {
-        addClock(e)
+         new Clock(this.clockTraget).onLoad(e)
       })
+    }
+  }
+
+  moveArryEntry(data, forward) {
+    const timezones = [...this.timezones]
+    const index = timezones.indexOf(data)
+
+    if (forward === true) {
+      let temp = timezones[index + 1]
+      if (temp != null) {
+        timezones[index + 1] = timezones[index]
+        timezones[index] = temp
+      } else {
+        [temp] = [timezones[0]]
+        timezones[0] = timezones[index]
+        timezones[index] = temp
+      }
+    } else {
+      let temp = timezones[index - 1]
+      if (temp != null) {
+        timezones[index - 1] = timezones[index]
+        timezones[index] = temp
+      } else {
+        [temp] = [timezones[timezones.length - 1]]
+        console.log(temp)
+        timezones[timezones.length - 1] = timezones[index]
+        timezones[index] = temp
+      }
+    }
+    console.log(timezones)
+    this.timezones = [...timezones]
+    this.saveData(true)
+    this.initAllClocks()
+  }
+
+  onLoad() {
+    this.loadData()
+    const [clockTraget] = [this.clockTraget]
+
+    this.initAllClocks()
+
+    function addClock(data) {
+      new Clock(clockTraget).onLoad(data)
     }
 
     this.body.addEventListener('addNewClock', (e) => {
-      this.saveData(e.detail.string)
+      this.saveData(false, e.detail.string)
       addClock(e.detail.string)
     })
 
@@ -54,13 +99,13 @@ export default class Manager {
         const target = e.target.parentNode.parentNode
         parent.removeChild(target)
       }
-      
+
       if (e.target.hasAttribute('data-moveleft')) {
-        console.log('moveleft')
+        this.moveArryEntry(e.target.dataset.moveleft, false)
       }
 
       if (e.target.hasAttribute('data-moveright')) {
-        console.log('moveright')
+        this.moveArryEntry(e.target.dataset.moveright, true)
       }
     })
   }
