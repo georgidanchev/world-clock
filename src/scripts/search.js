@@ -84,7 +84,6 @@ export default class Search {
     }
 
     input.addEventListener('click', () => {
-      // input clicked
       serchBg.classList.add('active')
     })
 

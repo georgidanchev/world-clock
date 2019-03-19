@@ -17,6 +17,34 @@ $secs_hand_width: 4px;
 .clock {
   margin:0 30px 20px;
 
+
+
+  &__remove-clock {
+    margin-left: auto;
+    font-weight: bold;
+    font-size: 50px;
+    height: 45px;
+    width: 45px;
+    border-radius: 5px;
+    border: 1px solid black;
+    transition: opacity 200ms ease; 
+    text-shadow: 1px 1px gray;
+    @include flex-xy-center;
+    opacity: 0;
+
+    &:hover {
+      color: #d10000;
+    }
+
+    .text {
+      pointer-events: none;
+    }
+  }
+
+  &:hover .clock__remove-clock {
+    opacity: 1;
+  }
+
   &__title {
     text-transform: uppercase;
     text-align: center;
@@ -40,7 +68,6 @@ $secs_hand_width: 4px;
     background-image: url("/src/assets/clockface.png");
     background-size: cover;
     background-repeat: no-repeat;
-  
   }
 
   &__face {
@@ -130,5 +157,11 @@ $secs_hand_width: 4px;
     text-shadow: 1px 1px #797979;
     background-color: rgba(190, 190, 190, 0.7);
     border: 2px solid #666565;
+  }
+
+  &:hover {
+    .clock__digi {
+      z-index: 4;
+    }
   }
 }

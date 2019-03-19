@@ -12,6 +12,7 @@ export default class Clock {
     this.hour = 0
     this.min = 0
     this.sec = 0
+    console.log(DateTime.local())
   }
 
   createClock() {
@@ -25,6 +26,7 @@ export default class Clock {
 
     // Create the clock html structure.
     div.innerHTML = `
+    <div class="clock__remove-clock" data-timezone="${this.timeZone}"><span class="text">&#215;</span></div>
     <div class="clock__wrap">
       <div class="clock__face">
         <div class="clock__hands">
@@ -84,7 +86,14 @@ export default class Clock {
   }
 
   onLoad(_timeZone) {
-    this.timeZone = _timeZone
+    if (_timeZone === 'start') {
+      this.timeZone = this.dateTime.zoneName
+    } else {
+      this.timeZone = _timeZone
+    }
+
+    console.log(this.dateTime.zoneName)
+
     this.createClock()
     this.updateTime()
 
