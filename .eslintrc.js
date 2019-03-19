@@ -35,7 +35,7 @@ module.exports = {
     "no-unused-vars": 1,
     "comma-dangle": 2,
     "eol-last": 0,
-    "no-console": 0,
+    "no-console": 1,
     "spaced-comment": 1,
     "no-plusplus": 0,
     "indent": 0,

@@ -28,14 +28,8 @@ export default class Manager {
     }
   }
 
-  removeClock(data) {
-    const newArry = this.timezones.filter(item => item !== data)
-    localStorage.setItem('timezones',
-    JSON.stringify(newArry))
-    console.log(this.timezones)
-  }
-
   initAllClocks() {
+    this.loadData()
     document.querySelector(this.clockTraget).innerHTML = ''
 
     if (this.timezones.length > 0) {
@@ -71,14 +65,19 @@ export default class Manager {
         timezones[index] = temp
       }
     }
-    console.log(timezones)
     this.timezones = [...timezones]
     this.saveData(true)
     this.initAllClocks()
   }
 
+  removeClock(data) {
+    const newArry = this.timezones.filter(item => item !== data)
+    localStorage.setItem('timezones',
+    JSON.stringify(newArry))
+    this.initAllClocks()
+  }
+
   onLoad() {
-    this.loadData()
     const [clockTraget] = [this.clockTraget]
 
     this.initAllClocks()
@@ -95,9 +94,6 @@ export default class Manager {
     this.body.addEventListener('click', (e) => {
       if (e.target.hasAttribute('data-removezone')) {
         this.removeClock(e.target.dataset.removezone)
-        const parent = e.target.parentNode.parentNode.parentNode
-        const target = e.target.parentNode.parentNode
-        parent.removeChild(target)
       }
 
       if (e.target.hasAttribute('data-moveleft')) {
