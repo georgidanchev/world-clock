@@ -12,7 +12,6 @@ export default class Clock {
     this.hour = 0
     this.min = 0
     this.sec = 0
-    console.log(DateTime.local())
   }
 
   createClock() {
@@ -26,7 +25,16 @@ export default class Clock {
 
     // Create the clock html structure.
     div.innerHTML = `
-    <div class="clock__remove-clock" data-timezone="${this.timeZone}"><span class="text">&#215;</span></div>
+    <div class="clock-controls">
+      <div class="clock-controls__wrap">
+        <!-- arrow left -->
+        <svg class="clock-controls__icon" data-moveleft="${this.timeZone}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon-cheveron-left-circle"><circle cx="12" cy="12" r="10" fill="#64D5CA" class="primary"/><path fill="#20504F" class="secondary" d="M13.7 15.3a1 1 0 0 1-1.4 1.4l-4-4a1 1 0 0 1 0-1.4l4-4a1 1 0 0 1 1.4 1.4L10.42 12l3.3 3.3z"/></svg>
+        <!-- arrow right -->
+        <svg class="clock-controls__icon" data-moveright="${this.timeZone}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon-cheveron-right-circle"><circle cx="12" cy="12" r="10" class="primary"/><path class="secondary" d="M10.3 8.7a1 1 0 0 1 1.4-1.4l4 4a1 1 0 0 1 0 1.4l-4 4a1 1 0 0 1-1.4-1.4l3.29-3.3-3.3-3.3z"/></svg>
+      </div>
+      <!-- remove icon -->
+      <svg class="clock-controls__icon" data-removezone="${this.timeZone}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon-close-circle"><circle cx="12" cy="12" r="10" class="primary"/><path class="secondary" d="M13.41 12l2.83 2.83a1 1 0 0 1-1.41 1.41L12 13.41l-2.83 2.83a1 1 0 1 1-1.41-1.41L10.59 12 7.76 9.17a1 1 0 0 1 1.41-1.41L12 10.59l2.83-2.83a1 1 0 0 1 1.41 1.41L13.41 12z"/></svg>
+    </div>
     <div class="clock__wrap">
       <div class="clock__face">
         <div class="clock__hands">
@@ -91,8 +99,6 @@ export default class Clock {
     } else {
       this.timeZone = _timeZone
     }
-
-    console.log(this.dateTime.zoneName)
 
     this.createClock()
     this.updateTime()

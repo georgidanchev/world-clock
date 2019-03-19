@@ -1,9 +1,9 @@
+// General clock sizes.
 $clock_size: 250px;
-
-$digits_color: red;
-$sec_hand_color: red;
 $clock_buble_size: 15px;
+$clock_icon_size: 40px;
 
+// Clock hands width.
 $hrs_hand_width: 8px;
 $mins_hand_width: 6px;
 $secs_hand_width: 4px;
@@ -14,34 +14,39 @@ $secs_hand_width: 4px;
   height: 100%;
 }
 
+.clock-controls {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+  opacity: 0;
+  transition: opacity 300ms ease;
+
+  &__icon {
+    height: $clock_icon_size;
+
+    .primary {
+      fill: $ui-secondary-color;
+      pointer-events: none;
+    }
+
+    .secondary {
+      fill: $ui-primary-color;
+      pointer-events: none;
+    }
+
+    &:hover {
+      .secondary {
+        fill: $ui-tertiary-color;
+      }
+    }
+    
+  }
+}
+
 .clock {
   margin:0 30px 20px;
 
-
-
-  &__remove-clock {
-    margin-left: auto;
-    font-weight: bold;
-    font-size: 50px;
-    height: 45px;
-    width: 45px;
-    border-radius: 5px;
-    border: 1px solid black;
-    transition: opacity 200ms ease; 
-    text-shadow: 1px 1px gray;
-    @include flex-xy-center;
-    opacity: 0;
-
-    &:hover {
-      color: #d10000;
-    }
-
-    .text {
-      pointer-events: none;
-    }
-  }
-
-  &:hover .clock__remove-clock {
+  &:hover .clock-controls {
     opacity: 1;
   }
 
@@ -78,7 +83,7 @@ $secs_hand_width: 4px;
   &__center-buble {
     height: $clock_buble_size;
     width: $clock_buble_size;
-    background-color: $sec_hand_color;
+    background-color: $ui-tertiary-color;
     transform: translate(-50%, -50%);
     border-radius: 50%;
     position: absolute;
@@ -109,10 +114,6 @@ $secs_hand_width: 4px;
     border: 1px solid rgba(255, 255, 255, 0.8);
   }
 
-  &__hand--inited {
-    transition: none;
-  }
-
   &__hand-hours {
     left: calc(50% - #{$hrs_hand_width / 2});
     width: $hrs_hand_width;
@@ -128,7 +129,7 @@ $secs_hand_width: 4px;
   }
 
   &__hand-secs {
-    background-color: $sec_hand_color;
+    background-color: $ui-tertiary-color;
     left: calc(50% - #{$secs_hand_width / 2});
     width: $secs_hand_width;
     height: 50%;
@@ -151,12 +152,12 @@ $secs_hand_width: 4px;
     text-align: center;
     font-size: 25px;
     font-weight: bold;
-    color: $digits_color;
+    color: $ui-tertiary-color;
 
     border-radius: 5px;
     text-shadow: 1px 1px #797979;
-    background-color: rgba(190, 190, 190, 0.7);
-    border: 2px solid #666565;
+    background-color: #dadadab3;
+    border: 2px solid #c0c0c0;
   }
 
   &:hover {

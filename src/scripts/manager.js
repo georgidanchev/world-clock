@@ -48,11 +48,19 @@ export default class Manager {
     })
 
     this.body.addEventListener('click', (e) => {
-      if (e.target.hasAttribute('data-timezone')) {
-        this.removeClock(e.target.dataset.timezone)
-        const parent = e.target.parentNode.parentNode
-        const target = e.target.parentNode
+      if (e.target.hasAttribute('data-removezone')) {
+        this.removeClock(e.target.dataset.removezone)
+        const parent = e.target.parentNode.parentNode.parentNode
+        const target = e.target.parentNode.parentNode
         parent.removeChild(target)
+      }
+      
+      if (e.target.hasAttribute('data-moveleft')) {
+        console.log('moveleft')
+      }
+
+      if (e.target.hasAttribute('data-moveright')) {
+        console.log('moveright')
       }
     })
   }
