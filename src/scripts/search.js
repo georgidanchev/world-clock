@@ -49,12 +49,15 @@ export default class Search {
   }
 
   onLoad() {
-    // There are issues when we use 'this.something' 
+    // There are issues when we use 'this.something'
     // in these named function as 'this' references the
     // onload method, which is not our data. So we use
     // to overcome this, we destructure our variables.
-    
+
     const [body, input, output, serchBg] = [this.body, this.input, this.output, this.serchBg]
+
+    // For span click prevention.
+    let clickStop = false
 
     // We have few named function as their
     // functionality is used multiple times.
@@ -78,6 +81,7 @@ export default class Search {
         serchBg.classList.remove('active')
         output.innerHTML = ''
         input.value = ''
+        clickStop = false
       }, time)
     }
 
@@ -99,6 +103,7 @@ export default class Search {
 
     // On keypress in the input field.
     input.onkeypress = (e) => {
+      if (clickStop === true) return
       const key = e.charCode || e.keyCode || 0
       // If we press enter in the input field
         if (key === 13) {
@@ -107,13 +112,14 @@ export default class Search {
         e.preventDefault()
 
         // If we have only 1 result, mark that entry
-        // as active for UI feedback and its dataset
-        // entry for our new clock.
-        if (output.childElementCount === 1) {
+        // as active to add blue background and pass
+        // its dataset entry for our new clock.
+        if (output.childElementCount === 1 && clickStop !== true) {
           addNewClock(output.firstChild.dataset.timezone)
           output.firstChild.classList.add('active')
           // reset everything after 0.5s.
-          resetInput(500)
+          resetInput(300)
+          clickStop = true
         }
       }
     }
@@ -123,15 +129,16 @@ export default class Search {
       serchBg.classList.add('active')
     })
 
-    // If we click on one of the results and 
+    // If we click on one of the results and
     // it has a dataset of timezone, then pass
     // that timezone as our new clock.
     output.addEventListener('click', (e) => {
-      if (e.target.dataset.timezone) {
+      if (e.target.dataset.timezone && clickStop !== true) {
         addNewClock(e.target.dataset.timezone)
         e.target.classList.add('active')
         // reset everything after 0.5s.
-        resetInput(500)
+        resetInput(300)
+        clickStop = true
       }
     })
 
@@ -139,7 +146,7 @@ export default class Search {
     // the background it means we want to click away,
     // so reset everything without any delay.
     serchBg.addEventListener('click', (e) => {
-      if (e.target === serchBg) {
+      if (e.target === serchBg && clickStop !== true) {
         resetInput()
       }
     })

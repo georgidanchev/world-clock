@@ -19,8 +19,12 @@ $secs_hand_width: 4px;
   transition: opacity 300ms ease;
   padding: 0 10px;
   display: flex;
-  margin: 20px;
+  margin: 20px 0;
   opacity: 0;
+
+  @include mobile-small {
+    margin: 0 0 10px 0;
+  }
 
   &__icon {
     height: $clock_icon_size;
