@@ -23,7 +23,7 @@ $secs_hand_width: 4px;
   opacity: 0;
 
   @include mobile-small {
-    margin: 0 0 10px 0;
+    margin: 10px 0;
   }
 
   &__icon {
