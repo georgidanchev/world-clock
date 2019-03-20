@@ -1,3 +1,4 @@
+// Clock module. Uses luxon package.
 import { DateTime } from 'luxon'
 
 export default class Clock {
@@ -20,8 +21,11 @@ export default class Clock {
     // Add class to it.
     div.className = 'clock'
 
+    // Clock title
     let cityName = this.timeZone
-
+    // if clock title contains '/' it means
+    // it has to be split. also replace '_'
+    // with spaces for proper formating.
     if (cityName.includes('/')) {
       cityName = cityName.split('/')[1].replace('_', ' ').replace('_', ' ')
     }
@@ -30,12 +34,12 @@ export default class Clock {
     div.innerHTML = `
     <div class="clock-controls">
       <div class="clock-controls__wrap">
-        <!-- arrow left -->
+        <!-- arrow left SVG icon -->
         <svg class="clock-controls__icon" data-moveleft="${this.timeZone}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon-cheveron-left-circle"><circle cx="12" cy="12" r="10" fill="#64D5CA" class="primary"/><path fill="#20504F" class="secondary" d="M13.7 15.3a1 1 0 0 1-1.4 1.4l-4-4a1 1 0 0 1 0-1.4l4-4a1 1 0 0 1 1.4 1.4L10.42 12l3.3 3.3z"/></svg>
-        <!-- arrow right -->
+        <!-- arrow right SVG icon -->
         <svg class="clock-controls__icon" data-moveright="${this.timeZone}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon-cheveron-right-circle"><circle cx="12" cy="12" r="10" class="primary"/><path class="secondary" d="M10.3 8.7a1 1 0 0 1 1.4-1.4l4 4a1 1 0 0 1 0 1.4l-4 4a1 1 0 0 1-1.4-1.4l3.29-3.3-3.3-3.3z"/></svg>
       </div>
-      <!-- remove icon -->
+      <!-- remove icon SVG icon-->
       <svg class="clock-controls__icon" data-removezone="${this.timeZone}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon-close-circle"><circle cx="12" cy="12" r="10" class="primary"/><path class="secondary" d="M13.41 12l2.83 2.83a1 1 0 0 1-1.41 1.41L12 13.41l-2.83 2.83a1 1 0 1 1-1.41-1.41L10.59 12 7.76 9.17a1 1 0 0 1 1.41-1.41L12 10.59l2.83-2.83a1 1 0 0 1 1.41 1.41L13.41 12z"/></svg>
     </div>
     <div class="clock__wrap">
@@ -52,13 +56,13 @@ export default class Clock {
     <h2 class="clock__title">${cityName}</h2>
     `
 
-    // Get references for the clock hands
+    // Get references for the clock hands and digi-clock
     this.handHrs = div.querySelector('[data-hrs-hand]')
     this.handMins = div.querySelector('[data-mins-hand]')
     this.handSecs = div.querySelector('[data-secs-hand]')
     this.digiClock = div.querySelector('[data-clock-digi]')
 
-    // Append the clock
+    // Append the clock to the page.
     this.target.appendChild(div)
   }
 
@@ -84,23 +88,39 @@ export default class Clock {
   }
 
   updateTime() {
+    // This is called every second.
+
     function zerofiy(num) {
+      // If less then 10 add 0 in front of
+      // the number, for nice formatting.
       return (num < 10 ? '0' : '') + num
     }
 
+    // Get the current time.
     this.dateTime = DateTime.local().setZone(this.timeZone)
+    // Set the current time.
     this.hour = this.dateTime.hour
     this.min = this.dateTime.minute
     this.sec = this.dateTime.second
+    // Pre-process the digi-time string.
     this.digiTime = `${this.dateTime.weekdayShort.toUpperCase()} ${zerofiy(this.hour)}:${zerofiy(this.min)}`
+    // set the time.
     this.setTime()
   }
 
   onLoad(_timeZone) {
+    // Set current timezone.
     this.timeZone = _timeZone
+    // Create clock html.
     this.createClock()
+    // Update the clock.
     this.updateTime()
 
+    // Update the clock very second. This method
+    // is alright for a clock, but not for a timer
+    // as the 'setInterval' method can sometimes be
+    // temporary forced to stop by the browser.
+    // e.g. safari on scroll.
     setInterval(() => {
       this.updateTime()
     }, 1000)

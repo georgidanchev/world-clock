@@ -10,15 +10,16 @@ $secs_hand_width: 4px;
 
 .clocks-wrap {
   @include flex-xy-center;
+  padding-bottom: 80px;
   flex-wrap: wrap;
 }
 
 .clock-controls {
-  margin: 20px;
-  display: flex;
   justify-content: space-between;
   transition: opacity 300ms ease;
   padding: 0 10px;
+  display: flex;
+  margin: 20px;
   opacity: 0;
 
   &__icon {
@@ -74,15 +75,15 @@ $secs_hand_width: 4px;
       height:#{$clock_size / 1.5};
     }
 
-    border: 20px solid #c0c0c0;
-    border-radius: 50%;
-    position: relative;
-    padding: 2rem;
     box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1), inset 0 0 0 3px #efefef,
       inset 0 0 10px black, 0 0 10px rgba(0, 0, 0, 0.2);
     background-image: url("/src/assets/clockface.png");
     background-size: cover;
     background-repeat: no-repeat;
+    border: 20px solid #c0c0c0;
+    border-radius: 50%;
+    position: relative;
+    padding: 2rem;
   }
 
   &__face {
@@ -97,18 +98,18 @@ $secs_hand_width: 4px;
     transform: translate(-50%, -50%);
     border-radius: 50%;
     position: absolute;
-    top: 50%;
-    left: 50%;
     z-index: 2;
+    left: 50%;
+    top: 50%;
   }
 }
 
 .clock {
   &__hands {
     position: relative;
-    z-index: 1;
-    width: 100%;
     height: 100%;
+    width: 100%;
+    z-index: 1;
   }
 
   &__hand {
@@ -119,9 +120,9 @@ $secs_hand_width: 4px;
     position: absolute;
     top: 0%;
 
-    border-radius: 5px;
-    background: black;
     border: 1px solid rgba(255, 255, 255, 0.8);
+    background: black;
+    border-radius: 5px;
   }
 
   &__hand-hours {

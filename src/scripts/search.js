@@ -31,11 +31,16 @@ export default class Search {
       const newString = String(place).replace('_', ' ').replace('_', ' ')
       // build html with template litreal.
 
+      // To highlight the string we have typed
+      // in the input box, we use ragex.
       const regex = new RegExp(value, 'gi')
 
+      // We replace part of the result with our regax.
       const highLight = newString.replace(regex, `<span class="highlight">${value}</span>`)
 
+      // We return result HTML and pass it the highlighting aswell.
       return `<li class="search-cities__results" data-result data-timezone="${place}">${highLight}</li>`
+
       // replace ',' with '' (nothing).
     }).join('')
 
@@ -43,11 +48,18 @@ export default class Search {
     this.output.innerHTML = html
   }
 
-
   onLoad() {
-    const [body, input, output, serchBg] = [this.body, this.input, this.output, this.serchBg]
+    // There are issues when we use 'this.something' 
+    // in these named function as 'this' references the
+    // onload method, which is not our data. So we use
+    // to overcome this, we destructure our variables.
     
+    const [body, input, output, serchBg] = [this.body, this.input, this.output, this.serchBg]
+
+    // We have few named function as their
+    // functionality is used multiple times.
     function addNewClock(data) {
+      // add clock sends custom event with the timezone.
       body.dispatchEvent(new CustomEvent('addNewClock', {
         detail: {
           string: data,
@@ -56,6 +68,10 @@ export default class Search {
     }
 
     function resetInput(time) {
+      // Once we have added the clock we
+      // want to reset everything back.
+      // This does just that, also gives
+      // the ability to add a small delay.
       setTimeout(() => {
         input.classList.remove('active')
         output.classList.remove('active')
@@ -65,45 +81,67 @@ export default class Search {
       }, time)
     }
 
-    // On load push json file into array.
+    // On load, push json file which contains all
+    // timezones into the global array array.
     this.cities.push(...json)
-    // On keyup pass value to match func.
+
+    // On keyup, pass the input value to the match func.
     input.addEventListener('keyup', (e) => {
       // Replace spaces with underscore as
       // the json file needs that to work.
       this.showMatches(String(input.value).replace(' ', '_').replace(' ', '_'))
+
+      // Add active class to the input
+      // for the rounded corners to be
+      // removed from to bottom sides.
       e.target.classList.add('active')
     })
 
+    // On keypress in the input field.
     input.onkeypress = (e) => {
+      const key = e.charCode || e.keyCode || 0
       // If we press enter in the input field
-        const key = e.charCode || e.keyCode || 0
         if (key === 13) {
+        // Stop the default behavior (page refresh,
+        // as we aren't posting or getting anything).
         e.preventDefault()
+
+        // If we have only 1 result, mark that entry
+        // as active for UI feedback and its dataset
+        // entry for our new clock.
         if (output.childElementCount === 1) {
           addNewClock(output.firstChild.dataset.timezone)
           output.firstChild.classList.add('active')
+          // reset everything after 0.5s.
           resetInput(500)
         }
       }
     }
-
+    // If we click on the input itself then add
+    // active class to the global background.
     input.addEventListener('click', () => {
       serchBg.classList.add('active')
     })
 
+    // If we click on one of the results and 
+    // it has a dataset of timezone, then pass
+    // that timezone as our new clock.
     output.addEventListener('click', (e) => {
       if (e.target.dataset.timezone) {
         addNewClock(e.target.dataset.timezone)
         e.target.classList.add('active')
+        // reset everything after 0.5s.
         resetInput(500)
       }
     })
 
+    // If we click on the transparent background and only
+    // the background it means we want to click away,
+    // so reset everything without any delay.
     serchBg.addEventListener('click', (e) => {
       if (e.target === serchBg) {
         resetInput()
       }
     })
   }
- }
+}

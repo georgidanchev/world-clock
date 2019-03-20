@@ -2,22 +2,21 @@ $ui-primary-color: #5D55FA;
 $ui-secondary-color: whitesmoke;
 $ui-tertiary-color: #E12D39;
 
-
 input::placeholder {
   color: $ui-primary-color;
   font-weight: bold;
 }
 
+// Icon accent colours. 
 .primary {
   fill: $ui-secondary-color;
 }
-
 .secondary {
   fill: $ui-primary-color;
 }
 
+// Background color gradient
 .main-bg {
-  
   background: #627d98; /* Old browsers */
   background: -moz-linear-gradient(
     top,
