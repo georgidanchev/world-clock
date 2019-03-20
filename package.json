@@ -1,6 +1,6 @@
 {
-  "name": "webpack_framework",
-  "version": "1.0.3",
+  "name": "world-clock",
+  "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "private": true,
