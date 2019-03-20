@@ -5,6 +5,13 @@ $search-wdith: 300px;
 $search-input-bg: whitesmoke;
 $search-wrap-bg: #9FB3C8;
 
+
+.highlight {
+  background-color: $ui-primary-color;
+  text-transform: capitalize;
+  color: $search-input-bg;
+}
+
 .search-cities {
   &__wrap {
     @include flex-xy-center;

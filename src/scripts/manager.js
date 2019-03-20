@@ -60,7 +60,6 @@ export default class Manager {
         timezones[index] = temp
       } else {
         [temp] = [timezones[timezones.length - 1]]
-        console.log(temp)
         timezones[timezones.length - 1] = timezones[index]
         timezones[index] = temp
       }

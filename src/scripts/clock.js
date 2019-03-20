@@ -21,7 +21,11 @@ export default class Clock {
     // Add class to it.
     div.className = 'clock'
 
-    const cityName = this.timeZone.split('/')[1].replace('_', ' ').replace('_', ' ')
+    let cityName = this.timeZone
+
+    if (cityName.includes('/')) {
+      cityName = cityName.split('/')[1].replace('_', ' ').replace('_', ' ')
+    }
 
     // Create the clock html structure.
     div.innerHTML = `

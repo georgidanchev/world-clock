@@ -28,9 +28,14 @@ export default class Search {
     const html = matchArray.map((place) => {
       // Split at '/' and keep the second part,
       // then replace up to two underscores.
-      const newString = String(place.split('/')[1]).replace('_', ' ').replace('_', ' ')
+      const newString = String(place).replace('_', ' ').replace('_', ' ')
       // build html with template litreal.
-      return `<li class="search-cities__results" data-result data-timezone="${place}">${newString}</li>`
+
+      const regex = new RegExp(value, 'gi')
+
+      const highLight = newString.replace(regex, `<span class="highlight">${value}</span>`)
+
+      return `<li class="search-cities__results" data-result data-timezone="${place}">${highLight}</li>`
       // replace ',' with '' (nothing).
     }).join('')
 
