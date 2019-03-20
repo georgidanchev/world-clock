@@ -1,5 +1,4 @@
 import { DateTime } from 'luxon'
-import Flags from './flags'
 
 export default class Clock {
   constructor(_target) {
@@ -50,7 +49,7 @@ export default class Clock {
         <span class="clock__digi" data-clock-digi>00:00:00</span>
       </div>
     </div>
-    <h2 class="clock__title"><img class="clock__title-img" src="/src/assets/flags/${Flags(cityName)}.png" alt=""> ${cityName}</h2>
+    <h2 class="clock__title">${cityName}</h2>
     `
 
     // Get references for the clock hands
@@ -99,8 +98,6 @@ export default class Clock {
 
   onLoad(_timeZone) {
     this.timeZone = _timeZone
-    
-
     this.createClock()
     this.updateTime()
 

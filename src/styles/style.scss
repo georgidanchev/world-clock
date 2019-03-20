@@ -1,10 +1,8 @@
 @import "~normalize-scss/sass/normalize/import-now";
 @import "mixins/responsive";
 @import "mixins/other";
-@import "global/general";
 @import "global/colors";
-@import "header/menuBtn";
-@import "header/mobMenu";
-@import "header/header";
+@import "global/fonts";
+@import "global/general";
 @import "header/search";
 @import "main/clock";

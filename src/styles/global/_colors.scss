@@ -2,12 +2,23 @@ $ui-primary-color: #127fbf;
 $ui-secondary-color: whitesmoke;
 $ui-tertiary-color: #E12D39;
 
+$search-wrap-bg: #5D55FA;
+
 input::placeholder {
   color: $ui-primary-color;
   font-weight: bold;
 }
 
+.primary {
+  fill: $ui-secondary-color;
+}
+
+.secondary {
+  fill: $ui-primary-color;
+}
+
 .main-bg {
+  
   background: #627d98; /* Old browsers */
   background: -moz-linear-gradient(
     top,

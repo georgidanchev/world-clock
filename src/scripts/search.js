@@ -46,7 +46,7 @@ export default class Search {
 
   onLoad() {
     const [body, input, output, serchBg] = [this.body, this.input, this.output, this.serchBg]
-
+    
     function addNewClock(data) {
       body.dispatchEvent(new CustomEvent('addNewClock', {
         detail: {

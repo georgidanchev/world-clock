@@ -11,10 +11,10 @@ $secs_hand_width: 4px;
 .clocks-wrap {
   @include flex-xy-center;
   flex-wrap: wrap;
-  height: 100%;
 }
 
 .clock-controls {
+  margin: 20px;
   display: flex;
   justify-content: space-between;
   transition: opacity 300ms ease;
@@ -27,12 +27,10 @@ $secs_hand_width: 4px;
     opacity: .8;
 
     .primary {
-      fill: $ui-secondary-color;
       pointer-events: none;
     }
 
     .secondary {
-      fill: $ui-primary-color;
       pointer-events: none;
     }
 
@@ -46,6 +44,9 @@ $secs_hand_width: 4px;
 
 .clock {
   margin:0 30px 20px;
+  @include mobile-small {
+    margin:10px 0;
+  }
 
   &:hover .clock-controls {
     opacity: 1;
@@ -54,6 +55,8 @@ $secs_hand_width: 4px;
   &__title {
     text-transform: uppercase;
     text-align: center;
+    text-shadow: 1px 1px 1px $ui-secondary-color;
+    opacity: 0.9;
   }
 
   &__title-img {
@@ -64,9 +67,14 @@ $secs_hand_width: 4px;
   &__wrap {
     width: $clock_size;
     height: $clock_size;
+
+    @include mobile-small {
+      width: #{$clock_size / 1.5};
+      height:#{$clock_size / 1.5};
+    }
+
     border: 20px solid #c0c0c0;
     border-radius: 50%;
-    margin: 30px auto;
     position: relative;
     padding: 2rem;
     box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1), inset 0 0 0 3px #efefef,
@@ -143,15 +151,14 @@ $secs_hand_width: 4px;
     transform: translate(-50%, -50%);
     display: inline-block;
 
-    padding: 2px 0 1px;
+    padding: 2px 0 4px;
     position: absolute;
-    width: 150px;
+    width: 135px;
     top: 62%;
     left: 50%;
 
-    font-family: Courier;
     text-align: center;
-    font-size: 25px;
+    font-size: 20px;
     font-weight: bold;
     color: $ui-tertiary-color;
 

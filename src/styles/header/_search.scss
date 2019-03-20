@@ -2,14 +2,11 @@ $search-input-height: 30px;
 $search-wrap-height: 80px;
 $search-wdith: 300px;
 
-$search-input-bg: whitesmoke;
-$search-wrap-bg: #9FB3C8;
-
 
 .highlight {
   background-color: $ui-primary-color;
   text-transform: capitalize;
-  color: $search-input-bg;
+  color: $ui-secondary-color;
 }
 
 .search-cities {
@@ -22,7 +19,7 @@ $search-wrap-bg: #9FB3C8;
   }
 
   &__input, &__suggestions {
-    background-color: $search-input-bg;
+    background-color: $ui-secondary-color;
     padding: 5px 0;
   }
 
@@ -32,6 +29,9 @@ $search-wrap-bg: #9FB3C8;
     position: relative;
 
     width: $search-wdith;
+    @include mobile-small {
+      width:#{$search-wdith / 1.2}
+    }
     height: $search-input-height;
     z-index: 5;
     border: 0;
@@ -51,6 +51,9 @@ $search-wrap-bg: #9FB3C8;
 
   &__suggestions {
     width: $search-wdith;
+    @include mobile-small {
+      width:#{$search-wdith / 1.2}
+    }
     position: absolute;
     z-index: 5;
 
