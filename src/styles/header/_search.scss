@@ -12,7 +12,7 @@ $search-wdith: 300px;
 .search-cities {
   &__wrap {
     @include flex-xy-center;
-    background-color: $search-wrap-bg;
+    background-color: $ui-primary-color;
     height: $search-wrap-height;
     position: relative;
     z-index: 5;
