@@ -20,7 +20,10 @@ $secs_hand_width: 4px;
   padding: 0 10px;
   display: flex;
   margin: 20px 0;
-  opacity: 0;
+
+  @include above-desktop-small {
+    opacity: 0;
+  }
 
   @include mobile-small {
     margin: 10px 0;
