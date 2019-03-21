@@ -17,7 +17,7 @@ Things that I like:
 * Hover effects on the clock
 
 Things that can be improved:
-* Results list limited to only 5ish entries.
+* Results list limited to only 5ish entries (performance).
 * No duplicate clocks, should be filtered on input.
 * Hover states on mobile should on touch w/t js.
 * when you click on a result - scroll down to new clock.
