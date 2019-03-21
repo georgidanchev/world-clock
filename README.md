@@ -19,12 +19,12 @@ Things that I like:
 Things that can be improved:
 * Results list limited to only 5ish entries (performance).
 * No duplicate clocks, should be filtered on input.
-* Hover states on mobile should on touch w/t js.
-* when you click on a result - scroll down to new clock.
+* Hover states on mobile should use touch w/t js.
 * On mobile, one or two clocks per screen strictly (100vh).
+* When you click on a result - scroll down to new clock.
 * Screen readers - do they even work on this?
 * digital clock should scale up and down the resolution.
-* fonts should scale up and down with resolution.
+* Donts should scale up and down with resolution.
 * On 4k everything should scale the same as HD.
 
 To view the project please click [here](https://w3althambition.github.io/world-clock/dist/index.html).
