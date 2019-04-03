@@ -14,6 +14,8 @@ Technologies used:
 * SCSS
 * BEM
 
+<br />
+
 Things that I like:
 * Luxon API is pretty cool
 * The search functionality
