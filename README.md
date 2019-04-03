@@ -8,6 +8,7 @@ Technologies used:
 * ES6 Modules
 * ES6
 * SCSS
+* BEM
 
 Things that I like:
 * Luxon API is pretty cool
