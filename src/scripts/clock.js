@@ -1,33 +1,36 @@
 // Clock module. Uses luxon package.
-import { DateTime } from 'luxon'
+import { DateTime } from 'luxon';
 
 export default class Clock {
   constructor(_target) {
-    this.target = document.querySelector(_target)
-    this.dateTime = DateTime.local()
-    this.timeZone = 'Europe/London'
-    this.curDegrees = 0
-    this.digiClock = 0
-    this.digiTime = 0
-    this.hour = 0
-    this.min = 0
-    this.sec = 0
+    this.target = document.querySelector(_target);
+    this.dateTime = DateTime.local();
+    this.timeZone = 'Europe/London';
+    this.curDegrees = null;
+    this.digiClock = null;
+    this.digiTime = null;
+    this.hour = null;
+    this.min = null;
+    this.sec = null;
   }
 
   createClock() {
     // Create a blank div element
-    const div = document.createElement('div')
+    const div = document.createElement('div');
 
     // Add class to it.
-    div.className = 'clock'
+    div.className = 'clock';
 
     // Clock title
-    let cityName = this.timeZone
+    let cityName = this.timeZone;
     // if clock title contains '/' it means
     // it has to be split. also replace '_'
     // with spaces for proper formating.
     if (cityName.includes('/')) {
-      cityName = cityName.split('/')[1].replace('_', ' ').replace('_', ' ')
+      cityName = cityName
+        .split('/')[1]
+        .replace('_', ' ')
+        .replace('_', ' ');
     }
 
     // Create the clock html structure.
@@ -54,37 +57,37 @@ export default class Clock {
       </div>
     </div>
     <h2 class="clock__title">${cityName}</h2>
-    `
+    `;
 
     // Get references for the clock hands and digi-clock
-    this.handHrs = div.querySelector('[data-hrs-hand]')
-    this.handMins = div.querySelector('[data-mins-hand]')
-    this.handSecs = div.querySelector('[data-secs-hand]')
-    this.digiClock = div.querySelector('[data-clock-digi]')
+    this.handHrs = div.querySelector('[data-hrs-hand]');
+    this.handMins = div.querySelector('[data-mins-hand]');
+    this.handSecs = div.querySelector('[data-secs-hand]');
+    this.digiClock = div.querySelector('[data-clock-digi]');
 
     // Append the clock to the page.
-    this.target.appendChild(div)
+    this.target.appendChild(div);
   }
 
   setTime() {
-    // Conver time to degrees.
+    // Convert time to degrees.
     this.curDegrees = {
       // There are 30 degrees in each hour, also
       // 6 degree for each minute and second.
       // Modulo gives us the reminder of 12,
-      // as the hour we get is 24 hour fromat.
+      // as the hour we get is 24 hour format.
       hrs: 30 * (this.hour % 12),
       mins: 6 * this.min,
       secs: 6 * this.sec,
-    }
+    };
 
     // Set analogue clock hands.
-    this.handHrs.style.transform = `rotate(${this.curDegrees.hrs}deg)`
-    this.handMins.style.transform = `rotate(${this.curDegrees.mins}deg)`
-    this.handSecs.style.transform = `rotate(${this.curDegrees.secs}deg)`
+    this.handHrs.style.transform = `rotate(${this.curDegrees.hrs}deg)`;
+    this.handMins.style.transform = `rotate(${this.curDegrees.mins}deg)`;
+    this.handSecs.style.transform = `rotate(${this.curDegrees.secs}deg)`;
 
     // Set the digital clock.
-    this.digiClock.innerText = `${this.digiTime}`
+    this.digiClock.innerText = `${this.digiTime}`;
   }
 
   updateTime() {
@@ -93,28 +96,28 @@ export default class Clock {
     function zerofiy(num) {
       // If less then 10 add 0 in front of
       // the number, for nice formatting.
-      return (num < 10 ? '0' : '') + num
+      return (num < 10 ? '0' : '') + num;
     }
 
     // Get the current time.
-    this.dateTime = DateTime.local().setZone(this.timeZone)
+    this.dateTime = DateTime.local().setZone(this.timeZone);
     // Set the current time.
-    this.hour = this.dateTime.hour
-    this.min = this.dateTime.minute
-    this.sec = this.dateTime.second
+    this.hour = this.dateTime.hour;
+    this.min = this.dateTime.minute;
+    this.sec = this.dateTime.second;
     // Pre-process the digi-time string.
-    this.digiTime = `${this.dateTime.weekdayShort.toUpperCase()} ${zerofiy(this.hour)}:${zerofiy(this.min)}`
+    this.digiTime = `${this.dateTime.weekdayShort.toUpperCase()} ${zerofiy(this.hour)}:${zerofiy(this.min)}`;
     // set the time.
-    this.setTime()
+    this.setTime();
   }
 
   onLoad(_timeZone) {
     // Set current timezone.
-    this.timeZone = _timeZone
+    this.timeZone = _timeZone;
     // Create clock html.
-    this.createClock()
+    this.createClock();
     // Update the clock.
-    this.updateTime()
+    this.updateTime();
 
     // Update the clock very second. This method
     // is alright for a clock, but not for a timer
@@ -122,7 +125,7 @@ export default class Clock {
     // temporary forced to stop by the browser.
     // e.g. safari on scroll.
     setInterval(() => {
-      this.updateTime()
-    }, 1000)
+      this.updateTime();
+    }, 1000);
   }
 }
